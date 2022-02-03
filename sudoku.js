@@ -28,7 +28,7 @@ const validateSudoku = (board) => {
   }
 
   /*
-    Aqui eu apens chamo a função validateSudokuColumn que recebe como parâmetro
+    Aqui chamo a função validateSudokuColumn que recebe como parâmetro
     o nosso sudoku/board e armazeno o valor do retorno da função em uma variável auxiliar.
   */
   let valueColomns = validateSudokuColumn(board);
@@ -95,36 +95,34 @@ const validateSudokuSquares = (board) => {
   let array1 = [];
   let array2 = [];
   let array3 = [];
-  let result1 = null;
-  let result2 = null;
-  let result3 = null;
+  let result = null;
 
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board.length; j++) {
       if (j < 3) {
         array1.push(board[i][j]);
         if (array1.length === 9) {
-          result1 = validateSudokuLines(array1);
+          result = validateSudokuLines(array1);
           array1 = [];
-          if (!result1) {
+          if (!result) {
             return false;
           }
         }
       } else if (j < 6 && j >= 3) {
         array2.push(board[i][j]);
         if (array2.length === 9) {
-          result2 = validateSudokuLines(array2);
+          result = validateSudokuLines(array2);
           array2 = [];
-          if (!result2) {
+          if (!result) {
             return false;
           }
         }
       } else if (j >= 6 && j < board.length) {
         array3.push(board[i][j]);
         if (array3.length === 9) {
-          result3 = validateSudokuLines(array3);
+          result = validateSudokuLines(array3);
           array3 = [];
-          if (!result3) {
+          if (!result) {
             return false;
           }
         }
