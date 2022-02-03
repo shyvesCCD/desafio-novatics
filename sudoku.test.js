@@ -48,6 +48,18 @@ board4 = [
   [".", ".", ".", ".", "8", ".", ".", "7", "9"],
 ];
 
+board5 = [
+  ["8", "3", ".", ".", "7", ".", ".", ".", "."],
+  ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+  [".", "4", "5", ".", "9", ".", ".", "6", "."],
+  ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+  ["4", ".", ".", "4", ".", "3", ".", ".", "1"],
+  ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+  [".", "6", ".", ".", ".", ".", "2", "8", "."],
+  [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+  [".", ".", ".", ".", "8", ".", ".", "7", "9"],
+];
+
 test("Testando o primeiro board disponível no README.", () => {
   expect(validateSudoku(board)).toBe(true);
 });
@@ -62,4 +74,8 @@ test("Testando o terceiro board criado para ter mais testes.", () => {
 
 test("Testando o quarto board criado para testar os mini blocos.", () => {
   expect(validateSudoku(board4)).toBe(false);
+});
+
+test("Testando o quarto board criado para testar os mini blocos.", () => {
+  expect(validateSudoku(board5)).toBe(false);
 });
