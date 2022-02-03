@@ -33,12 +33,14 @@ const validateSudoku = (board) => {
   */
   let valueColomns = validateSudokuColumn(board);
 
+  let valueSquares = validateSudokuSquares(board);
+
   /*
     Aqui eu apenas checo se alguma das variáveis está como valor false, caso sim,
     eu retorno false para identificar que o sudoku não é válido, caso não, eu retorno true
     para sinalizar que o sudoku é válido.
   */
-  if (!valueLines || !valueColomns) {
+  if (!valueLines || !valueColomns || !valueSquares) {
     return false;
   } else {
     return true;
@@ -69,7 +71,7 @@ const validateSudokuLines = (array) => {
 */
 const validateSudokuColumn = (array) => {
   let pivot = [];
-  let result = Boolean;
+  let result = null;
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length; j++) {
       pivot.push(array[j][i]);
@@ -88,5 +90,62 @@ const validateSudokuColumn = (array) => {
   // Caso não retorne em nenhum momento como false eu retorno como true.
   return true;
 };
+
+const validateSudokuSquares = (board) => {
+  let array1 = [];
+  let array2 = [];
+  let array3 = [];
+  let result1 = null;
+  let result2 = null;
+  let result3 = null;
+
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      if (j < 3) {
+        array1.push(board[i][j]);
+        if (array1.length === 9) {
+          result1 = validateSudokuLines(array1);
+          array1 = [];
+          if (!result1) {
+            return false;
+          }
+        }
+      } else if (j < 6 && j >= 3) {
+        array2.push(board[i][j]);
+        if (array2.length === 9) {
+          result2 = validateSudokuLines(array2);
+          array2 = [];
+          if (!result2) {
+            return false;
+          }
+        }
+      } else if (j >= 6 && j < board.length) {
+        array3.push(board[i][j]);
+        if (array3.length === 9) {
+          result3 = validateSudokuLines(array3);
+          array3 = [];
+          if (!result3) {
+            return false;
+          }
+        }
+      }
+    }
+  }
+  return true;
+};
+
+board4 = [
+  ["8", "3", ".", ".", "7", ".", ".", ".", "."],
+  ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+  [".", "8", "5", ".", ".", ".", ".", "6", "."],
+  ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+  ["4", ".", ".", "4", ".", "3", ".", ".", "1"],
+  ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+  [".", "6", ".", ".", ".", ".", "2", "8", "."],
+  [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+  [".", ".", ".", ".", "8", ".", ".", "7", "9"],
+];
+
+validateSudoku(board4);
 
 module.exports = validateSudoku;
